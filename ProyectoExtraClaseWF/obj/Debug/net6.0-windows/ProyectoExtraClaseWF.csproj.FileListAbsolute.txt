@@ -16,3 +16,21 @@ C:\Users\jeroe\Desktop\Codigo\Proyectos Universidad\Compiladores\ProyectoExtraCl
 C:\Users\jeroe\Desktop\Codigo\Proyectos Universidad\Compiladores\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ref\ProyectoExtraClaseWF.dll
 C:\Users\jeroe\Desktop\Codigo\Proyectos Universidad\Compiladores\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\CompiladorClaseWF.frmIngreso.resources
 C:\Users\jeroe\Desktop\Codigo\Proyectos Universidad\Compiladores\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\CompiladorClaseWF.frmTablasComponentes.resources
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\bin\Debug\net6.0-windows\ProyectoExtraClaseWF.exe
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\bin\Debug\net6.0-windows\ProyectoExtraClaseWF.deps.json
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\bin\Debug\net6.0-windows\ProyectoExtraClaseWF.runtimeconfig.json
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\bin\Debug\net6.0-windows\ProyectoExtraClaseWF.dll
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\bin\Debug\net6.0-windows\ProyectoExtraClaseWF.pdb
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.csproj.AssemblyReference.cache
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\CompiladorClaseWF.frmIngreso.resources
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\CompiladorClaseWF.frmTablasComponentes.resources
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.csproj.GenerateResource.cache
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.GeneratedMSBuildEditorConfig.editorconfig
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.AssemblyInfoInputs.cache
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.AssemblyInfo.cs
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.csproj.CoreCompileInputs.cache
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.dll
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\refint\ProyectoExtraClaseWF.dll
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.pdb
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ProyectoExtraClaseWF.genruntimeconfig.cache
+C:\ProyectosProgramación\ProyectoExtraClaseWF\ProyectoExtraClaseWF\obj\Debug\net6.0-windows\ref\ProyectoExtraClaseWF.dll
