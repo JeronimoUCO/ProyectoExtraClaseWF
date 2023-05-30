@@ -582,22 +582,22 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState5()
         {
-            CreateComponentWithouReturnIndex(Category.PARENTESIS_QUE_ABRE, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.PARENTESIS_QUE_ABRE, ComponentType.NORMAL);
         }
 
         private static void ProcessState6()
         {
-            CreateComponentWithouReturnIndex(Category.PARENTESIS_QUE_CIERRA, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.PARENTESIS_QUE_CIERRA, ComponentType.NORMAL);
         }
 
         private static void ProcessState7()
         {
-            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_FIN, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI DE ARCHIVO
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_FIN, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI DE ARCHIVO
         }
 
         private static void ProcessState8()
         {
-            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_FINSI, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_FINSI, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI
         }
 
         private static void ProcessState9()
@@ -628,17 +628,21 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState11()
         {
-            //ERROR
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibo un símbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que sólo existan símbolos aceptados por el lenguaje...";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState12()
         {
-            //RETORNAR Y
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_Y, ComponentType.NORMAL);
         }
 
         private static void ProcessState14()
         {
-            //RETORNAR O
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_O, ComponentType.NORMAL);
         }
 
         private static void ProcessState16()
@@ -721,7 +725,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState22()
         {
-            //RETORNAR IMPRIMIR
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_IMPRIMIR, ComponentType.NORMAL);
         }
 
         private static void ProcessState24()
@@ -796,7 +800,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState29()
         {
-            //RETORNAR INICIO
+            CreateComponentWithoutReturnIndex(Category.PALABRA_RESERVADA_INICIO, ComponentType.NORMAL);
         }
         private static void ProcessState31()
         {
@@ -840,7 +844,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState35()
         {
-            Return(Category.PALABRA_RESERVADA_SI);
+            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_SI, ComponentType.NORMAL);
         }
         private static void ProcessState36()
         {
@@ -857,7 +861,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState37()
         {
-            Return(Category.PALABRA_RESERVADA_SINO);
+            CreateComponentReturningIndex(Category.PALABRA_RESERVADA_SINO, ComponentType.NORMAL);
         }
         private static void ProcessState38()
         {
@@ -898,23 +902,23 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState41()
         {
-            CreateComponentWithouReturnIndex(Category.DIVISION, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.DIVISION, ComponentType.NORMAL);
         }
         private static void ProcessState42()
         {
-            CreateComponentWithouReturnIndex(Category.MULTIPLICACION, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.MULTIPLICACION, ComponentType.NORMAL);
         }
         private static void ProcessState43()
         {
-            CreateComponentWithouReturnIndex(Category.RESTA, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.RESTA, ComponentType.NORMAL);
         }
         private static void ProcessState44()
         {
-            CreateComponentWithouReturnIndex(Category.SUMA, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.SUMA, ComponentType.NORMAL);
         }
         private static void ProcessState45()
         {
-            CreateComponentWithouReturnIndex(Category.IGUAL_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState46()
         {
@@ -948,7 +952,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState48()
         {
-            Return(Category.MENOR_IGUAL_QUE);
+            CreateComponentReturningIndex(Category.MENOR_IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState49()
         {
@@ -956,11 +960,11 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState50()
         {
-            CreateComponentWithouReturnIndex(Category.DIFERENTE_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.DIFERENTE_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState51()
         {
-            CreateComponentWithouReturnIndex(Category.MAYOR_IGUAL_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.MAYOR_IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState52()
         {
@@ -1018,15 +1022,15 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState60()
         {
-            CreateComponentWithouReturnIndex(Category.ENTRADA_DATOS, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.ENTRADA_DATOS, ComponentType.NORMAL);
         }
         private static void ProcessState62()
         {
-            CreateComponentWithouReturnIndex(Category.LLAVE_ABRE, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.LLAVE_ABRE, ComponentType.NORMAL);
         }
         private static void ProcessState64()
         {
-            CreateComponentWithouReturnIndex(Category.LLAVE_CIERRA, ComponentType.NORMAL);
+            CreateComponentWithoutReturnIndex(Category.LLAVE_CIERRA, ComponentType.NORMAL);
         }
 
         private static void ProcessState66()
@@ -1269,7 +1273,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         }
 
-        private static void CreateComponentWithouReturnIndex(Category category, ComponentType type)
+        private static void CreateComponentWithoutReturnIndex(Category category, ComponentType type)
         {
             INSTANCE.Continue = false;
 
