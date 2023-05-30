@@ -844,7 +844,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState35()
         {
-            Return(Category.PALABRA_RESERVADA_SI);
+            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_SI, ComponentType.NORMAL);
         }
         private static void ProcessState36()
         {
@@ -861,7 +861,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState37()
         {
-            Return(Category.PALABRA_RESERVADA_SINO);
+            CreateComponentReturningIndex(Category.PALABRA_RESERVADA_SINO, ComponentType.NORMAL);
         }
         private static void ProcessState38()
         {
@@ -952,7 +952,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState48()
         {
-            Return(Category.MENOR_IGUAL_QUE);
+            CreateComponentReturningIndex(Category.MENOR_IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState49()
         {

@@ -8,19 +8,19 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\jeroe\\.nuget\\packages\\": {}
+    "C:\\Users\\salas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeroe\\Desktop\\Codigo\\Proyectos Universidad\\Compiladores\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF.csproj",
+      "projectUniqueName": "C:\\Users\\salas\\source\\repos\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF.csproj",
       "projectName": "ProyectoExtraClaseWF",
-      "projectPath": "C:\\Users\\jeroe\\Desktop\\Codigo\\Proyectos Universidad\\Compiladores\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF.csproj",
-      "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jeroe\\Desktop\\Codigo\\Proyectos Universidad\\Compiladores\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\obj\\",
+      "projectPath": "C:\\Users\\salas\\source\\repos\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF.csproj",
+      "packagesPath": "C:\\Users\\salas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\salas\\source\\repos\\ProyectoExtraClaseWF\\ProyectoExtraClaseWF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jeroe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\salas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
