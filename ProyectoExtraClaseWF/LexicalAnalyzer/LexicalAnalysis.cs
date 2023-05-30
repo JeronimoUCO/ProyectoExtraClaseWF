@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProyectoExtraClaseWF.DataCache;
+using ProyectoExtraClaseWF.ErrorManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +18,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         public static void Initialize()
         {
-            DataCache.Scanner.Initialize();
+            Scanner.Initialize();
         }
 
         private static void ReturnAndBack(Category category)
@@ -36,7 +38,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void Concatenate()
         {
-            INSTANCE.Lexeme = INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter();
+            INSTANCE.Lexeme = INSTANCE.Lexeme + Scanner.GetCurrentCharacter();
         }
 
         private static void Concanate(string character)
@@ -46,11 +48,11 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void DevourBlankCharacter()
         {
-            DataCache.Scanner.ReadNextCharacter();
+            Scanner.ReadNextCharacter();
 
-            while (" ".Equals(DataCache.Scanner.GetCurrentCharacter()))
+            while (" ".Equals(Scanner.GetCurrentCharacter()))
             {
-                DataCache.Scanner.ReadNextCharacter();
+                Scanner.ReadNextCharacter();
             }
         }
 
@@ -580,22 +582,22 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState5()
         {
-            //RETORNAR PARENTESIS QUE ABRE
+            CreateComponentReturningIndex(Category.PARENTESIS_QUE_ABRE, ComponentType.NORMAL);
         }
 
         private static void ProcessState6()
         {
-            //RETORNAR PARENTESIS QUE CIERRA
+            CreateComponentReturningIndex(Category.PARENTESIS_QUE_CIERRA, ComponentType.NORMAL);
         }
 
         private static void ProcessState7()
         {
-            //RETORNAR PALABRA_RESERVADA_FINSI DE ARCHIVO
+            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_FIN, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI DE ARCHIVO
         }
 
         private static void ProcessState8()
         {
-            //RETORNAR PALABRA_RESERVADA_FINSI
+            CreateComponentWithouReturnIndex(Category.PALABRA_RESERVADA_FINSI, ComponentType.NORMAL);//RETORNAR PALABRA_RESERVADA_FINSI
         }
 
         private static void ProcessState9()
@@ -812,7 +814,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState32()
         {
-            ReturnAndBack(Category.IDENTIFICADOR);
+            CreateComponentReturningIndex(Category.IDENTIFICADOR, ComponentType.NORMAL);
         }
         private static void ProcessState33()
         {
@@ -896,23 +898,23 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState41()
         {
-            Return(Category.DIVISION);
+            CreateComponentWithouReturnIndex(Category.DIVISION, ComponentType.NORMAL);
         }
         private static void ProcessState42()
         {
-            Return(Category.MULTIPLICACION);
+            CreateComponentWithouReturnIndex(Category.MULTIPLICACION, ComponentType.NORMAL);
         }
         private static void ProcessState43()
         {
-            Return(Category.RESTA);
+            CreateComponentWithouReturnIndex(Category.RESTA, ComponentType.NORMAL);
         }
         private static void ProcessState44()
         {
-            Return(Category.SUMA);
+            CreateComponentWithouReturnIndex(Category.SUMA, ComponentType.NORMAL);
         }
         private static void ProcessState45()
         {
-            Return(Category.IGUAL_QUE);
+            CreateComponentWithouReturnIndex(Category.IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState46()
         {
@@ -950,19 +952,19 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState49()
         {
-            ReturnAndBack(Category.MENOR_QUE);
+            CreateComponentReturningIndex(Category.MENOR_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState50()
         {
-            Return(Category.DIFERENTE_QUE);
+            CreateComponentWithouReturnIndex(Category.DIFERENTE_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState51()
         {
-            Return(Category.MAYOR_IGUAL_QUE);
+            CreateComponentWithouReturnIndex(Category.MAYOR_IGUAL_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState52()
         {
-            ReturnAndBack(Category.MAYOR_QUE);
+            CreateComponentReturningIndex(Category.MAYOR_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState53()
         {
@@ -970,7 +972,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static void ProcessState54()
         {
-            ReturnAndBack(Category.DECIMAL);
+            CreateComponentReturningIndex(Category.DECIMAL, ComponentType.NORMAL);
         }
         private static void ProcessState55()
         {
@@ -1076,7 +1078,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se terminó la linea sin cerrar la cadena, cadena no valida...";
             string solution = "Agregue una comilla al final de la linea...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState72()
@@ -1102,7 +1104,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba N para formar un FIN valido,se recibió (caracter actual)...";
             string solution = "Si pretende formar un FIN, cambien el caracter actual por una N...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState74()
@@ -1110,7 +1112,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba I para formar un FIN valido, se recibió (caracter actual)...";
             string solution = "Si pretende formar un FIN, cambien el caracter actual por una I...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState75()
@@ -1118,7 +1120,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba M o N para formar un imprimir o inicio validos, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una M...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState76()
@@ -1126,28 +1128,28 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba P para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una P...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState77()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba R para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una R...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState78()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba I para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una I...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState79()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba M para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una M...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState80()
@@ -1155,7 +1157,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba I para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una I...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState81()
@@ -1163,7 +1165,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba R para formar un imprimir valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un IMPRIMIR, cambie el caracter actual por una R...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState82()
@@ -1171,64 +1173,64 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba O para formar un inicio valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un INICIO, cambie el caracter actual por una O...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState83()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba I para formar un inicio valido, se recibió (caracter actual)";
             string solution = "Si pretende formar un INICIO, cambie el caracter actual por una I...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState84()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba C para formar un inicio valido,se recibió (caracter actual)";
             string solution = "Si pretende formar un INICIO, cambie el caracter actual por una C...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState85()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba I para formar un inicio valido,se recibió (caracter actual)";
             string solution = "Si pretende formar un INICIO, cambie el caracter actual por una I...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState86()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba N para formar un inicio valido,se recibió (caracter actual)";
             string solution = "Si pretende formar un INICIO, cambie el caracter actual por una N...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState87()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error se esperaba o para formar un SINO, se recibió (caracter actual)";
             string solution = "Si pretende formar un SINO, cambie el caracter actual por una N...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState88()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error, se terminó la linea sin cerrar la cadena, cadena no valida";
             string solution = "Agregue una comilla al final de la linea...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState89()
         {
             string fail = "Componente lexico no valido...";
             string cause = "Error, se esperaba una A para formar un LEA valido,se recibió (caracter actual) entrada de datos no valida";
             string solution = "Si pretende formar un LEA, cambie el caracter actual por una A...";
-            CreateLexicalError(ErrorManager.ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + DataCache.Scanner.GetCurrentCharacter());
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL, INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
 
         private static void CreateComponent(Category category, ComponentType type)
         {
-            int lineNumber = DataCache.Scanner.GetCurrentNumberLine();
-            int initialPosition = DataCache.Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
-            int finalPosition = DataCache.Scanner.GetCurrentIndex() - 1;
+            int lineNumber = Scanner.GetCurrentNumberLine();
+            int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+            int finalPosition = Scanner.GetCurrentIndex() - 1;
 
             if (ComponentType.NORMAL.Equals(type))
             {
@@ -1240,28 +1242,28 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
             }
         }
 
-        private static void CreateLexicalError(ErrorManager.ErrorType errorType, string fail, string cause, string solution, Category expecteCategory, string lexeme)
+        private static void CreateLexicalError(ErrorType errorType, string fail, string cause, string solution, Category expecteCategory, string lexeme)
         {
-            int lineNumber = DataCache.Scanner.GetCurrentNumberLine();
+            int lineNumber = Scanner.GetCurrentNumberLine();
 
-            ErrorManager.Error error;
+            Error error;
 
-            if (ErrorManager.ErrorType.STOPPER.Equals(errorType))
+            if (ErrorType.STOPPER.Equals(errorType))
             {
-                int initialPosition = DataCache.Scanner.GetCurrentIndex() - 1;
-                int finalPosition = DataCache.Scanner.GetCurrentIndex() - 1;
-                error = ErrorManager.Error.CreateStopperLexicalError(lineNumber, initialPosition, finalPosition, fail, cause, solution, expecteCategory, lexeme);
+                int initialPosition = Scanner.GetCurrentIndex() - 1;
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                error = Error.CreateStopperLexicalError(lineNumber, initialPosition, finalPosition, fail, cause, solution, expecteCategory, lexeme);
 
-                ErrorManager.ErrorManagment.Agregar(error);
+                ErrorManagement.Agregar(error);
                 throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis lexico. No es posible continuar con el proceso de compílación gasta que el error haya solucionado. Por favor verifique la consola de errores para tener más detalles del problema que se ha presentado....");
             }
-            else if (ErrorManager.ErrorType.CONTROLABLE.Equals(errorType))
+            else if (ErrorType.CONTROLABLE.Equals(errorType))
             {
-                int initialPosition = DataCache.Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
-                int finalPosition = DataCache.Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
 
-                error = ErrorManager.Error.CreateStopperLexicalError(lineNumber, initialPosition, finalPosition, fail, cause, solution, expecteCategory, lexeme);
-                ErrorManager.ErrorManagment.Agregar(error);
+                error = Error.CreateStopperLexicalError(lineNumber, initialPosition, finalPosition, fail, cause, solution, expecteCategory, lexeme);
+                ErrorManagement.Agregar(error);
             }
 
 
@@ -1276,7 +1278,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void CreateComponentReturningIndex(Category category, ComponentType type)
         {
-            DataCache.Scanner.ReturnIndex();
+            Scanner.ReturnIndex();
             INSTANCE.Continue = false;
 
             CreateComponent(category, type);
@@ -1290,7 +1292,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static bool IsLetter()
         {
-            return Char.IsLetter(DataCache.Scanner.GetCurrentCharacter().ToCharArray()[0]);
+            return Char.IsLetter(Scanner.GetCurrentCharacter().ToCharArray()[0]);
         }
 
         private static bool IsAny()
@@ -1299,7 +1301,7 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static bool IsAnyBut(String character)
         {
-            if (character.Equals(DataCache.Scanner.GetCurrentCharacter().ToCharArray()[0]))
+            if (character.Equals(Scanner.GetCurrentCharacter().ToCharArray()[0]))
             {
                 return false;
             }
@@ -1311,111 +1313,111 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static bool IsDigit()
         {
-            return Char.IsDigit(DataCache.Scanner.GetCurrentCharacter().ToCharArray()[0]);
+            return Char.IsDigit(Scanner.GetCurrentCharacter().ToCharArray()[0]);
         }
 
         private static bool IsCurrency()
         {
-            return "$".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "$".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsUnderline()
         {
-            return "_".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "_".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsAddition()
         {
-            return "+".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "+".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsMinusc()
         {
-            return Char.IsLower(DataCache.Scanner.GetCurrentCharacter().ToCharArray()[0]);
+            return Char.IsLower(Scanner.GetCurrentCharacter().ToCharArray()[0]);
         }
         private static bool IsMinus()
         {
-            return "-".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "-".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsMultiplication()
         {
-            return "*".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "*".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsSlash()
         {
-            return "/".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "/".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsEqual()
         {
-            return "=".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "=".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsGreaterThan()
         {
-            return ">".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return ">".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsLessThan()
         {
-            return "<".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "<".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsLeftParenthesis()
         {
-            return "(".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "(".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsRightParenthesis()
         {
-            return ")".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return ")".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsComma()
         {
-            return ",".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return ",".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsAt()
         {
-            return "@".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "@".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsEndOfLine()
         {
-            return "@FL@".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "@FL@".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsQuotationMark()
         {
-            return '"'.Equals(DataCache.Scanner.GetCurrentCharacter());
+            return '"'.Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsOpenBrace()
         {
-            return "{".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "{".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsCloseBrace()
         {
-            return "}".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "}".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsFL()
         {
-            return "@FL@".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "@FL@".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsEOF()
         {
-            return "@EOF@".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "@EOF@".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsA()
         {
-            return "A".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "A".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsB()
         {
-            return "B".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "B".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsC()
         {
@@ -1431,87 +1433,87 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
         }
         private static bool IsF()
         {
-            return "F".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "F".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsG()
         {
-            return "G".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "G".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsH()
         {
-            return "H".Equals( DataCache.Scanner.GetCurrentCharacter());
+            return "H".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsI()
         {
-            return "I".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "I".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsJ()
         {
-            return "J".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "J".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsK()
         {
-            return "K".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "K".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsL()
         {
-            return "L".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "L".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsM()
         {
-            return "M".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "M".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsN()
         {
-            return "N".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "N".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsO()
         {
-            return "O".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "O".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsP()
         {
-            return "P".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "P".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsQ()
         {
-            return "Q".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "Q".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsR()
         {
-            return "R".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "R".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsS()
         {
-            return "S".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "S".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsT()
         {
-            return "T".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "T".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsU()
         {
-            return "U".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "U".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsV()
         {
-            return "V".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "V".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsW()
         {
-            return "W".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "W".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsX()
         {
-            return "X".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "X".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsY()
         {
-            return "Y".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "Y".Equals(Scanner.GetCurrentCharacter());
         }
         private static bool IsZ()
         {
-            return "Z".Equals(DataCache.Scanner.GetCurrentCharacter());
+            return "Z".Equals(Scanner.GetCurrentCharacter());
         }
     }
 }

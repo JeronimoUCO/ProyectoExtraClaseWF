@@ -49,10 +49,6 @@ namespace ProyectoExtraClaseWF.CrossCutting
             }
             return returnList;
         }
-
-        public void Add(LexicalComponent component)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
+

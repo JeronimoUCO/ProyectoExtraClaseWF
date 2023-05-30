@@ -41,6 +41,22 @@ namespace ProyectoExtraClaseWF.ErrorManager
         {
             return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.LEXICO, ErrorType.CONTROLABLE, category, lexeme);
         }
+        public static Error CreateStopperSintacticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category category, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.CONTROLABLE, category, lexeme);
+        }
+        public static Error CreateNoStopperSintacticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category category, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.CONTROLABLE, category, lexeme);
+        }
+        public static Error CreateStopperSemanticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category category, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SEMANTICO, ErrorType.CONTROLABLE, category, lexeme);
+        }
+        public static Error CreateNoStopperSemanticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category category, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SEMANTICO, ErrorType.CONTROLABLE, category, lexeme);
+        }
 
         public string ToString()
         {
@@ -57,6 +73,22 @@ namespace ProyectoExtraClaseWF.ErrorManager
             sb.Append("Lexema: ").Append(Lexeme).Append("\n");
 
             return sb.ToString();
+        }
+        public List<String> ToTableInfo()
+        {
+            List<String> list = new List<String>
+            {
+                LineNumber.ToString(),
+                InitialPosition.ToString(),
+                FinalPosition.ToString(),
+                Fail.ToString(),
+                Cause.ToString(),
+                Solution.ToString(),
+                Level.ToString(),
+                Type.ToString(),
+                Lexeme.ToString()
+            };
+            return list;
         }
 
     }

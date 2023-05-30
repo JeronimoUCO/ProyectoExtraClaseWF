@@ -109,5 +109,16 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
             return sb.ToString();
         }
+
+        public List<String> ToTableInfo() {
+            List<String> list = new List<String>();
+            list.Add(Type.ToString());
+            list.Add(GetCategory().ToString());
+            list.Add(GetLexeme());
+            list.Add(GetLineNumber().ToString());
+            list.Add(GetInitialPosition().ToString());
+            list.Add(GetFinalPosition().ToString());
+            return list;
+        }
     }
 }
