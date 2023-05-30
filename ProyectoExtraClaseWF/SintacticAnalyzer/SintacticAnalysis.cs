@@ -2,21 +2,25 @@
 using ProyectoExtraClaseWF.LexicalAnalyzer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
-namespace ProyectoExtraClaseWF.SintacticAnalyzer
+namespace CompiladorClaseWF.SintacticAnalyzer
 {
     public class SintacticAnalysis
     {
         private LexicalComponent Component;
         private Stack<double> StackData = new Stack<double>();
-
+        private Stack<double> StackDataDemo;
         public string Analyze()
         {
             string response = "El proceso de análisis sintáctico finalizó exitosamente...";
             LexicalAnalysis.Initialize();
+            StackDataDemo = StackData;
+
             LeerSiguienteComponente();
             Expresion();
 
@@ -48,29 +52,31 @@ namespace ProyectoExtraClaseWF.SintacticAnalyzer
 
         private void ExpresionPrima()
         {
-            if (EsCategoriaEsperada(Category.SUMA))
+            while (EsCategoriaEsperada(Category.SUMA) || EsCategoriaEsperada(Category.RESTA))
             {
+                Category operador = Component.GetCategory();
                 LeerSiguienteComponente();
-                Expresion();
+                Termino();
 
                 if (!ErrorManagement.HayErrores())
                 {
                     double derecho = StackData.Pop();
                     double izquierdo = StackData.Pop();
-                    StackData.Push(izquierdo + derecho);
-                }
-            }
-            else if (EsCategoriaEsperada(Category.RESTA))
-            {
-                LeerSiguienteComponente();
-                Expresion();
 
-                if (!ErrorManagement.HayErrores())
-                {
-                    double derecho = StackData.Pop();
-                    double izquierdo = StackData.Pop();
-                    StackData.Push(izquierdo - derecho);
+                    if (operador.Equals(Category.SUMA))
+                    {
+                        StackData.Push(izquierdo + derecho);
+                    }
+                    else if (operador.Equals(Category.RESTA))
+                    {
+                        StackData.Push(izquierdo - derecho);
+                    }
                 }
+                foreach (double i in StackDataDemo)
+                {
+                    Debug.WriteLine(i);
+                }
+                Debug.WriteLine("----------------------------------------");
             }
         }
 
@@ -86,18 +92,18 @@ namespace ProyectoExtraClaseWF.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Termino();
-
                 if (!ErrorManagement.HayErrores())
                 {
                     double derecho = StackData.Pop();
                     double izquierdo = StackData.Pop();
                     StackData.Push(izquierdo * derecho);
+
                 }
             }
             else if (EsCategoriaEsperada(Category.DIVISION))
             {
                 LeerSiguienteComponente();
-                Termino();
+                Factor();
 
                 if (!ErrorManagement.HayErrores())
                 {
@@ -109,15 +115,21 @@ namespace ProyectoExtraClaseWF.SintacticAnalyzer
                         string fail = "División por cero...";
                         string cause = "Componente léxico igual a cero...";
                         string solution = "Asegúrese de que en este lugar esté ubicado un número diferente de cero...";
-                        CreateSintacticError(ErrorType.CONTROLABLE, fail, cause, solution, Category.DECIMAL,
+                        CreateSemanticError(ErrorType.CONTROLABLE, fail, cause, solution, Category.DECIMAL,
                             "Cero (0)");
 
                         derecho = 1;
                     }
-
                     StackData.Push(izquierdo / derecho);
+                    TerminoPrima();
                 }
+
             }
+            foreach (double i in StackDataDemo)
+            {
+                Debug.WriteLine(i);
+            }
+            Debug.WriteLine("----------------------------------------");
         }
 
         private void Factor()

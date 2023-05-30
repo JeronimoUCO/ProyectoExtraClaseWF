@@ -582,12 +582,12 @@ namespace ProyectoExtraClaseWF.LexicalAnalyzer
 
         private static void ProcessState5()
         {
-            CreateComponentReturningIndex(Category.PARENTESIS_QUE_ABRE, ComponentType.NORMAL);
+            CreateComponentWithouReturnIndex(Category.PARENTESIS_QUE_ABRE, ComponentType.NORMAL);
         }
 
         private static void ProcessState6()
         {
-            CreateComponentReturningIndex(Category.PARENTESIS_QUE_CIERRA, ComponentType.NORMAL);
+            CreateComponentWithouReturnIndex(Category.PARENTESIS_QUE_CIERRA, ComponentType.NORMAL);
         }
 
         private static void ProcessState7()

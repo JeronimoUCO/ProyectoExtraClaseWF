@@ -1,4 +1,4 @@
-﻿namespace ProyectoExtraClaseWF
+﻿namespace CompiladorClaseWF
 {
     partial class frmIngreso
     {
