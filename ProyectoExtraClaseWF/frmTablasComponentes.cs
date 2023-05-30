@@ -1,12 +1,11 @@
+using CompiladorClaseWF.SintacticAnalyzer;
 using ProyectoExtraClaseWF.CrossCutting;
 using ProyectoExtraClaseWF.DataCache;
 using ProyectoExtraClaseWF.ErrorManager;
 using ProyectoExtraClaseWF.LexicalAnalyzer;
-using ProyectoExtraClaseWF.SintacticAnalyzer;
 using System.Data;
-using System.Windows.Forms;
 
-namespace ProyectoExtraClaseWF
+namespace CompiladorClaseWF
 {
     public partial class frmTablasComponentes : Form
     {
@@ -25,11 +24,11 @@ namespace ProyectoExtraClaseWF
             for (int i = 0; i < codigoTxtIngresoUsuario.Codigo.Lines.Length; i++)
             {
                 string linea = codigoTxtIngresoUsuario.Codigo.Lines[i];
-                Cache.AddLine(Line.Create(i + 1, linea));
+                Cache.AddLine(Line.Create(i+1, linea));
             }
 
             LexicalAnalysis.Initialize();
-
+            
 
 
             try
@@ -39,7 +38,12 @@ namespace ProyectoExtraClaseWF
 
                 cadena += response + "\n";
 
-
+                /*while (!Category.EOF.Equals(component.GetCategory()))
+                {
+                    component = LexicalAnalysis.Analyze();
+                    response = SinAna.Analyze();
+                    cadena += response;
+                } */
 
             }
             catch (Exception exception)
@@ -130,19 +134,9 @@ namespace ProyectoExtraClaseWF
                 DataTable ErroresSimbolosSintacticos = crearTablaErrorLexico();
                 foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.SINTACTICO))
                 {
-
                     cadena += error.ToString() + "\n";
                     cadena += "========================= \n";
                     ErroresSimbolosSintacticos.Rows.Add(error.ToTableInfo().ToArray());
-                }
-                cadena += "-------ERRORES SINTÁCCTICOS---- \n";
-                DataTable ErroresSimbolosSemantico = crearTablaErrorLexico();
-                foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.SEMANTICO))
-                {
-
-                    cadena += error.ToString() + "\n";
-                    cadena += "========================= \n";
-                    ErroresSimbolosSemantico.Rows.Add(error.ToTableInfo().ToArray());
                 }
 
 

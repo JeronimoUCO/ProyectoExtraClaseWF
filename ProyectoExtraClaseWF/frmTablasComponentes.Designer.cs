@@ -1,4 +1,4 @@
-﻿namespace ProyectoExtraClaseWF
+﻿namespace CompiladorClaseWF
 {
     partial class frmTablasComponentes
     {
@@ -19,6 +19,13 @@
             }
             base.Dispose(disposing);
         }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             richTextBox1 = new RichTextBox();
@@ -244,6 +251,7 @@
             ResumeLayout(false);
         }
 
+        #endregion
         private Label lblDummy;
         private RichTextBox richTextBox1;
         private Label lblNormalSimbolos;
